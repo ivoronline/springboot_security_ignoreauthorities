@@ -7,17 +7,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-  //=================================================================
+  //====================================================================
   // CONFIGURE
-  //=================================================================
+  //====================================================================
   @Override
   protected void configure(HttpSecurity httpSecurity) throws Exception {
 
     //ADD AUTHORITIES TO ENDPOINTS
     httpSecurity.authorizeRequests()
-      .antMatchers("/EndPoint1").denyAll()              //No            access (even after Login)
-      .antMatchers("/EndPoint2").permitAll()            //Anonymous     access (no Login needed)
-      .antMatchers("/EndPoint3").authenticated();       //Authenticated access (ignores Roles & Authorities)
+      .antMatchers("/EndPoint2").permitAll()      //Anonymous     access (no   Login needed, default)
+      .antMatchers("/EndPoint3").authenticated()  //Authenticated access (only Login needed)
+      .antMatchers("/EndPoint4").denyAll();       //No            access (even after Login)
 
     //REDIRECT TO LOGIN FORM
     httpSecurity.formLogin();
@@ -25,3 +25,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
 }
+
+
